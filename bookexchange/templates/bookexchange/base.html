@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Book Exchange Platform{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Book Exchange Platform</h1>
+        <a class="add-book-button" href="{% url 'add_book' %}">Add a Book</a>
+    </header>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Book Exchange Platform</p>
+    </footer>
+</body>
+</html>
