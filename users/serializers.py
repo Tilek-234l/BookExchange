@@ -40,7 +40,7 @@ class CustomLoginSerializer(serializers.Serializer):
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User  # Используйте User вместо CustomUser
+        model = User
         fields = '__all__'
 
 class CustomRegisterSerializer(serializers.Serializer):

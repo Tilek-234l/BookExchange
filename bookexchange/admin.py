@@ -20,7 +20,7 @@ class BookAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('book', 'text', 'created_at')
     list_filter = ('book', 'created_at')
-    search_fields = ('text', 'user__email')  # Обновите эту строку
+    search_fields = ('text', 'user__email')
 
 
 

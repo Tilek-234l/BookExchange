@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from .serializers import CustomLoginSerializer, CustomRegisterSerializer, CustomUserSerializer
 from allauth.account.views import PasswordChangeView as AllAuthPasswordChangeView
 
+
 class CustomLoginView(APIView):
     http_method_names = ['post']
 
@@ -15,7 +16,6 @@ class CustomLoginView(APIView):
         serializer = CustomLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        # Ваш код обработки входа
         return Response({'token': user.auth_token.key})
 
 class CustomPasswordChangeView(AllAuthPasswordChangeView):
@@ -29,7 +29,6 @@ class CustomRegisterView(APIView):
         serializer = CustomRegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save(self.request)
-            # Ваш код обработки регистрации
             return Response({'detail': 'Successfully registered'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -43,5 +42,3 @@ class CustomLogoutView(APIView):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = CustomUserSerializer
-
-# Остальные вьюшки для вашего приложения

@@ -20,10 +20,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'drf_spectacular',
-    'rest_framework_simplejwt',  # Исправлено: было 'simplejwt'
+    'rest_framework_simplejwt',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',  # Добавлено: для социальных авторизаций
+    'allauth.socialaccount',
     'bookexchange',
 ]
 
@@ -88,4 +88,4 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LOGIN_URL = 'account_login'  # Замените на URL вашей страницы авторизации, если он отличается
+LOGIN_URL = 'account_login'

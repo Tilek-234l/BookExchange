@@ -16,20 +16,20 @@ class CustomUser(AbstractUser):
         Group,
         verbose_name=('groups'),
         blank=True,
-        related_name='custom_users_groups',  # Обратный доступ для groups
+        related_name='custom_users_groups',
         related_query_name='custom_user_group',
     )
     user_permissions = models.ManyToManyField(
         Permission,
         verbose_name=('user permissions'),
         blank=True,
-        related_name='custom_users_permissions',  # Обратный доступ для user_permissions
+        related_name='custom_users_permissions',
         related_query_name='custom_user_permission',
     )
     username = models.CharField(
         _('username'),
         max_length=30,
         unique=True,
-        null=True,  # Установите null=True
-        default='temp_username'  # Задайте временное значение по умолчанию
+        null=True,
+        default='temp_username'
     )
