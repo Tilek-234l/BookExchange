@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Book, Comment, Discussion, Review
 from django.utils.html import mark_safe
 from django.utils.translation import gettext_lazy as _
+from .models import Book, Comment, Discussion, Review
 
 
 

@@ -18,7 +18,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'rest_framework',
-    'drf_yasg',
     'drf_spectacular',
     'rest_framework_simplejwt',
     'allauth',
@@ -79,7 +78,6 @@ TEMPLATES = [
         },
     },
 ]
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

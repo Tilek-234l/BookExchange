@@ -9,16 +9,22 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 from rest_framework.routers import DefaultRouter
+from django.conf import settings
 
 from bookexchange import views
-from users.views import (CustomUserViewSet,
-                         CustomLoginView,
-                         CustomLogoutView,
-                         CustomPasswordChangeView,
-                         CustomRegisterView)
+from bookexchange.views import BookViewSet, BookCreateAPIView
+from users.views import (
+    CustomLoginView,
+    CustomLogoutView,
+    CustomPasswordChangeView,
+    CustomRegisterView
+)
 
 router = DefaultRouter()
-router.register(r'custom-users', CustomUserViewSet)
+router.register(r'books', views.BookViewSet, basename='book')
+router.register(r'comments', views.CommentViewSet, basename='comment')
+router.register(r'discussions', views.DiscussionViewSet, basename='discussion')
+router.register(r'reviews', views.ReviewViewSet, basename='review')
 
 swagger_urlpatterns = [
     path('', SpectacularAPIView.as_view(), name='schema'),
@@ -27,7 +33,6 @@ swagger_urlpatterns = [
 ]
 
 auth_urlpatterns = [
-    path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
@@ -43,15 +48,15 @@ api_v1_urlpatterns = [
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(api_v1_urlpatterns)),
-    path('books/', views.BookList.as_view({'get': 'list', 'post': 'create'}), name='book-list'),
-    path('comments/', views.CommentList.as_view({'get': 'list', 'post': 'create'}), name='comment-list'),
-    path('discussions/', views.DiscussionViewSet.as_view({'get': 'list', 'post': 'create'}), name='discussion-list'),
-    path('reviews/', views.ReviewViewSet.as_view({'get': 'list', 'post': 'create'}), name='review-list'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('password-change/', CustomPasswordChangeView.as_view(), name='password-change'),
     path('register/', CustomRegisterView.as_view(), name='register'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
-]
+    path('books-list/', BookViewSet.as_view({'get': 'list'}), name='books-list'),  # Добавляем этот URL-шаблон
+    path('book-create/', BookCreateAPIView.as_view({'post': 'create'}), name='book_create'),
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+if settings.DEBUG:
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += router.urls

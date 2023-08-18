@@ -2,15 +2,12 @@ from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
-
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     description = models.TextField()
     cover_image = models.ImageField(upload_to='book_covers')
-
-    class Book(models.Model):
-        owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     image = models.ImageField(
         _("Book Image"),
